@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<title>Team Page</title>
+
+<link rel="stylesheet" href="css/bootstrap.min.css"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700i" rel="stylesheet">
+<link href="master.css" type="text/css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="slick/slick.css">
+<link rel="stylesheet" type="text/css" href="slick/slick-theme.css">
+<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+
+<body>
+
+
+<header>
+
+	<div class="nav-icon float-right">
+		<span></span>
+		<span></span>
+		<span></span>
+	</div>
+
+</header>
+<div class="bottom">
+     <p>THE ENABLED DISABLED</p>
+</div>
+
+<section class="center slider">
+     <div>
+          <img src="one.png" alt="">
+          <h3>BK Akshatha</h3>
+          <p>Web developer</p>
+     </div>
+     <div>
+          <img src="two.png" alt="">
+          <h3>Harsh Patel</h3>
+          <p>App Developer</p>
+     </div>
+     <div>
+          <img src="three.jpg" alt="">
+          <h3>Benson Kho</h3>
+          <p>CEO</p>
+     </div>
+     <div>
+          <img src="one.jpg" alt="">
+          <h3>Ashhad Raza Quadri</h3>
+          <p>Sleeping zzz</p>
+     </div>
+     <div>
+          <img src="one.jpg" alt="">
+          <h3>Surya Kamal</h3>
+          <p>Need to fill</p>
+     </div>
+     <div>
+          <img src="one.jpg" alt="">
+          <h3>Anuj Yadav</h3>
+          <p>Node js</p>
+     </div>
+</section>
+
+<!-- Full Menu -->
+<div class="full-menu">
+	<div class="fullmenu-content">
+		<ul class="page-menu">
+            <div class='new'>
+			<li><a class="active" href="index.html">Home</a></li><br><br>
+			<li><a href="">About</a></li><br><br>
+			<li><a href="">FAQ</a></li><br><br>
+			<li><a href="">Contact</a></li><br>
+            <li><a href="team.html">Team Members</a></li>
+        </div>
+			<li class="social">
+				<a href="#"><img src="icons/social/twitter.svg" alt=""></a>
+				<a href="#"><img src="icons/social/dribbble.svg" alt=""></a>
+				<a href="#"><img src="icons/social/instagram.svg" alt=""></a>
+				<a href="#"><img src="icons/social/send.svg" alt=""></a>
+			</li>
+		</ul>
+	</div>
+	<a href="#0" class="modal-close">Close</a>
+</div>
+<div class="cd-transition-layer visible opening">
+	<div class="bg-layer"></div>
+</div><!-- Ink Transition -->
+
+</section>
+
+
+<script src="jquery-2.1.4.min.js"></script>
+
+ <script>
+ 'use strict';
+
+$(document).ready( function() {
+
+
+
+    var width = 100,
+        perfData = window.performance.timing,
+        EstimatedTime = -(perfData.loadEventEnd - perfData.navigationStart),
+        time = ((EstimatedTime/1000)%50) * 100
+
+
+    // Percentage Increment Animation
+    var PercentageID = $(".percentage"),
+            start = 0,
+            end = 100,
+            durataion = time;
+            animateValue(PercentageID, start, end, durataion);
+
+    function animateValue(id, start, end, duration) {
+
+        var range = end - start,
+          current = start,
+          increment = end > start? 1 : -1,
+          stepTime = Math.abs(Math.floor(duration / range)),
+          obj = $(id);
+
+
+        var timer = setInterval(function() {
+            current += increment;
+            $(obj).text(current);
+          //obj.innerHTML = current;
+            if (current == end) {
+                clearInterval(timer);
+            }
+        }, stepTime);
+    }
+
+
+
+	setTimeout(function(){
+        $('.preloader').fadeOut();
+
+        $('.cd-transition-layer').addClass('closing').delay(1000).queue(function(){
+            $(this).removeClass("visible closing opening").dequeue();
+        });
+
+	}, time);
+
+
+
+
+   // FADE OUT EFFECT WHEN CLICK A LINK
+    $(document).on("click", "a:not(.lightbox)", function () {
+        var newUrl = $(this).attr("href");
+        if (!newUrl || newUrl[0] === "#") {
+            location.hash = newUrl;
+            return;
+        }
+        $("html").fadeOut(function () {
+            location = newUrl;
+        });
+        return false;
+    });
+
+
+    var paget = $(".page-title .title").text();
+
+    $( ".page-title").append("<span></span>");
+    $( ".page-title span").append(paget);
+
+
+
+    //posts page hover
+    $('.blog-post .blog-link').hover(function(){
+        $(this).parent('.content-outter').parent('.blog-post').toggleClass('mousef');
+        $(this).parent('.blog-post').toggleClass('mousef');
+    });
+
+});
+
+
+
+
+$(window).load( function() {
+
+
+function smokeeffect () {
+    var modalTrigger = $('.nav-icon'),
+        transitionLayer = $('.cd-transition-layer'),
+        transitionBackground = transitionLayer.children(),
+        modalWindow = $('.full-menu');
+
+    var frameProportion = 1.78, //png frame aspect ratio
+        frames = 25, //number of png frames
+        resize = false;
+
+    //set transitionBackground dimentions
+    setLayerDimensions();
+    $(window).on('resize', function(){
+        if( !resize ) {
+            resize = true;
+            (!window.requestAnimationFrame) ? setTimeout(setLayerDimensions, 300) : window.requestAnimationFrame(setLayerDimensions);
+        }
+    });
+
+    //open modal window
+    modalTrigger.on('click', function(event){
+        event.preventDefault();
+        transitionLayer.addClass('visible opening');
+        var delay = ( $('.no-cssanimations').length > 0 ) ? 0 : 600;
+        setTimeout(function(){
+            modalWindow.addClass('visible');
+        }, delay);
+    });
+
+    //close modal window
+    modalWindow.on('click', '.modal-close', function(event){
+        event.preventDefault();
+        transitionLayer.addClass('closing');
+        modalWindow.removeClass('visible');
+        transitionBackground.one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(){
+            transitionLayer.removeClass('closing opening visible');
+            transitionBackground.off('webkitAnimationEnd oanimationend msAnimationEnd animationend');
+        });
+    });
+
+    function setLayerDimensions() {
+        var windowWidth = $(window).width(),
+            windowHeight = $(window).height(),
+            layerHeight, layerWidth;
+
+        if( windowWidth/windowHeight > frameProportion ) {
+            layerWidth = windowWidth;
+            layerHeight = layerWidth/frameProportion;
+        } else {
+            layerHeight = windowHeight*1.2;
+            layerWidth = layerHeight*frameProportion;
+        }
+
+        transitionBackground.css({
+            'width': layerWidth*frames+'px',
+            'height': layerHeight+'px',
+        });
+
+        resize = false;
+    }
+
+}
+smokeeffect()
+
+
+
+/*--------------------------------------------------
+ Hero Section Height
+---------------------------------------------------*/
+     function homeh() {
+        var hometext = $('.main')
+
+        hometext.css({
+            "height": $(window).height() + "px"
+        });
+    }
+    homeh();
+    $(window).resize(homeh);
+
+
+    $( ".page-menu li:not(.social) a, .portfolio_filter ul li a").append( "<span></span>" );
+
+    $('.nav-icon').on("click", function(){
+            $(this).toggleClass('modal-close');
+    });
+
+
+
+}); // document load end
+</script>
+<script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
+<script src="./slick/slick.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+
+$(document).on('ready', function() {
+
+$(".center").slick({
+
+dots: false,
+infinite: false,
+centerMode: true,
+slidesToShow: 2,
+slidesToScroll: 1,
+arrows: false,
+
+responsive: [{
+
+breakpoint: 1024,
+settings: {
+     slidesToShow: 2,
+     infinite: true
+}
+
+}, {
+
+breakpoint: 600,
+settings: {
+     slidesToShow: 1,
+     dots: true
+}
+
+}, {
+
+breakpoint: 300,
+settings: "unslick" //destroy slick
+
+}]
+
+});
+
+});
+
+</script>
+
+
+
+
+
+
+
+    </div>
+    </body>
+</html>
